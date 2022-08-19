@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './login.scss'
 import { FaSignInAlt } from 'react-icons/fa'
 import { AuthService } from '../../service/auth'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 
 const Login = () => {
     const loginValues = {
@@ -28,6 +28,10 @@ const Login = () => {
             console.log(errorMessage)
             setError(errorMessage)
         }
+    }
+
+    if(AuthService.getCurrentUser()) {
+       return <Navigate to={{ pathname: '/feed' }} />
     }
     return (
         <div className="login">
