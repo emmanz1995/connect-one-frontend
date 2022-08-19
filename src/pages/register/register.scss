@@ -1,0 +1,95 @@
+@use '../../sass/partials/variables';
+@use '../../sass/partials/mixins';
+
+.register {
+  height: 100vh;
+  @include mixins.flex(flex, center, center, 0);
+  &__background {
+    width: 800px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    //gap: 20px;
+  }
+  &__info {
+    width: 50%;
+    border-right: 1px dashed variables.$dark;
+    padding: 10px;
+  }
+  &__main {
+    width: 50%;
+    padding: 10px;
+  }
+  &__header {
+    @include mixins.flex(flex, center, center, 0);
+    gap: 4px;
+    color: #6C63FF;
+    margin-bottom: 10px;
+  }
+  &__input {
+    padding: 7px;
+    width: 100%;
+    margin: 10px 0;
+    border: 2px solid variables.$purple;
+    border-radius: 5px;
+  }
+  &__btn {
+    padding: 7px;
+    width: 100%;
+    margin: 10px 0;
+    border: 2px solid variables.$purple;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    &:hover {
+      background-color: variables.$purple;
+      color: #FAFBFF;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  &__link {
+    text-decoration: none;
+    color: #6C63FF;
+  }
+  &__text {
+    color: variables.$dark;
+    font-weight: normal;
+  }
+
+  &__nameWrapper {
+    width: 100%;
+    margin: 10px 0;
+    @include mixins.flex(flex, center, center, 10px);
+    .input {
+      width: 100%;
+      padding: 7px;
+      border: 2px solid variables.$purple;
+      border-radius: 5px;
+    }
+  }
+
+  &__img__wrapper {
+    width: 100%;
+  }
+  &__img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .register {
+    &__background {
+      display: flex;
+      flex-direction: column;
+    }
+    &__info {
+      border: none;
+      width: 100%;
+    }
+    &__main {
+      width: 100%;
+    }
+  }
+}

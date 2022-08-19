@@ -1,0 +1,49 @@
+@use '../../sass/partials/variables';
+@use '../../sass/partials/mixins';
+
+.login {
+  height: 100vh;
+  @include mixins.flex(flex, center, center, 0);
+  &__background {
+    width: 350px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    padding: 30px;
+  }
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #6C63FF;
+    margin-bottom: 10px;
+  }
+  &__title {}
+  &__input {
+    padding: 7px;
+    width: 100%;
+    margin: 10px 0;
+    border: 2px solid variables.$purple;
+    border-radius: 5px;
+  }
+  &__btn {
+    padding: 7px;
+    width: 100%;
+    margin: 10px 0;
+    border: 2px solid variables.$purple;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    &:hover {
+      background-color: variables.$purple;
+      color: #FAFBFF;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  &__link {
+    text-decoration: none;
+    color: #6C63FF;
+  }
+  &__text {
+    color: variables.$dark;
+    font-weight: normal;
+  }
+}

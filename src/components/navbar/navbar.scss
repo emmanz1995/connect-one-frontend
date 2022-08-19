@@ -1,0 +1,24 @@
+@use '../../sass/partials/variables';
+@use '../../sass/partials/mixins';
+
+.navbar {
+  width: 100%;
+  background-color: variables.$purple;
+  &__wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    @include mixins.flex(flex, center, space-between, 0);
+  }
+  &__header {
+    color: variables.$light;
+  }
+  &__ul {
+    list-style: none;
+    @include mixins.flex(flex, center, space-between, 25px);
+    color: variables.$light;
+  }
+  &__link {
+    text-decoration: none;
+    color: variables.$light;
+  }
+}
