@@ -3,9 +3,12 @@ import Card from '../../components/card/Card'
 import Navbar from '../../components/navbar/Navbar'
 import './feed.scss'
 import { PostService } from '../../service/post'
+import { UserService } from '../../service/user'
+import moment from 'moment'
 
 const Feed = () => {
     const [posts, setPosts] = useState([])
+    const [user, setUser] = useState({})
     const [loading, setLoading] = useState(false)
     useEffect(() => {
         PostService.getPosts().then((response) => {
@@ -48,21 +51,62 @@ const Feed = () => {
         }
     }
 
+    useEffect(() => {
+        UserService.getMe().then((response) => {
+            setUser(response)
+        }).catch(err => console.log(err))
+    }, [])
+
+    console.log(user)
+
     return (
         <div className="feed">
             <Navbar />
             <div className="feed__post__container">
                 <div className="feed__wrapper">
-                    {posts.map((post) => (
-                        <Card
-                            key={post.id}
-                            post={post}
-                            handleLikePost={handleLikePost}
-                            handleDislikePost={handleDislikePost}
-                            handleDeletePost={handleDeletePost}
-                        />
-                    ))}
+                    <div>
+                        {posts.map((post) => (
+                            <Card
+                                key={post.id}
+                                post={post}
+                                handleLikePost={handleLikePost}
+                                handleDislikePost={handleDislikePost}
+                                handleDeletePost={handleDeletePost}
+                            />
+                        ))}
+                    </div>
                 </div>
+                <aside className="feed__aside">
+                    <div className="profile-card">
+                        <div className="user-info1">
+                            <div className="profile-img-container">
+                                {user.avatar ? <img className="profile-img" src={user.avatar} alt="" width="600" height="400" /> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="profile-img" />}
+
+                            </div>
+                            <p>{user.name}</p>
+                            <p>{user.username}</p>
+                        </div>
+                        <hr />
+                        <div>
+                            <p>Joined In: {moment(user.createdAt).format('YYYY/MM/DD')}</p><br/>
+                            <p>{user.email}</p><br/>
+                            <p>Birthday: {moment(user.dob).format('YYYY/MM/DD')}</p>
+                        </div>
+                        <button className="go-profile-btn">Go to Profile</button>
+                    </div>
+                    <div className="menu">
+                        <h3>Menu</h3>
+                        <ul className="ul">
+                            <li><a className="ul__link" href="">Explore</a></li>
+                            <hr />
+                            <li><a className="ul__link" href="">Profile</a></li>
+                            <hr />
+                            <li><a className="ul__link" href="">Settings</a></li>
+                            <hr />
+                            <li><a className="ul__link" href="">Find Users</a></li>
+                        </ul>
+                    </div>
+                </aside>
             </div>
         </div>
     )

@@ -4,6 +4,70 @@
 .feed {
   &__post__container {
     max-width: 1000px;
-    margin: 10px auto;
+    margin: 0 auto;
+    @include mixins.flex(flex, none, space-between, 20px);
   }
+
+  &__wrapper {
+    width: 60%;
+  }
+
+  &__posts {}
+
+  &__aside {
+    width: 35%;
+    margin: 10px 0;
+    background-color: variables.$purple;
+    border-radius: 5px;
+    padding: 35px;
+    height: 100%;
+  }
+}
+
+.menu {
+  padding: 15px;
+  background-color: variables.$light;
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+.ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  &__link {
+    text-decoration: none;
+    color: variables.$dark;
+  }
+}
+
+.profile-card {
+  padding: 15px;
+  background-color: variables.$dark;
+  color: variables.$light;
+  width: 100%;
+  border-radius: 5px;
+}
+.user-info1 {
+  text-align: center;
+}
+.profile-img-container {
+  width: 100px;
+  margin: 0 auto;
+}
+.profile-img {
+  width: 100%;
+  height: auto;
+  border-radius: 100%;
+}
+.go-profile-btn {
+  width: 100%;
+  padding: 7px;
+  margin: 10px 0 0 0;
+  border-radius: 5px;
+  border: none;
+  background-color: variables.$purple;
+  cursor: pointer;
+  color: variables.$light;
 }

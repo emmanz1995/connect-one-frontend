@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './card.scss'
 import { FaTrash, FaStar, FaRegStar, FaComment, FaBookmark } from 'react-icons/fa'
 import { AuthService } from '../../service/auth'
@@ -18,9 +18,9 @@ const Card = ({ post, handleLikePost, handleDislikePost, handleDeletePost }) => 
                     </div>
                     <a href="#" className="link">{post?.postedBy?.username}</a>
                 </div>
-                {post?.postedBy?.id?.includes(user.id) && (
+                {post?.postedBy?.id?.includes(user?.id) && (
                     <div>
-                        <FaTrash size={20} onClick={() => handleDeletePost(post.id)} />
+                        <FaTrash size={20} style={{ cursor: 'pointer' }} onClick={() => handleDeletePost(post?.id)} />
                     </div>
                 )}
             </div>
@@ -31,22 +31,22 @@ const Card = ({ post, handleLikePost, handleDislikePost, handleDeletePost }) => 
                     </a>
                 </div>
                 <span>
-                   <p><b>{post?.postedBy?.username}</b> {post.content}</p>
+                   <p><b>{post?.postedBy?.username}</b>{' '}{post?.content}</p>
                 </span>
             </div>
             <div className="card__footer">
                 <div className="card__actions">
                     <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                        <p>{post.likes.length}</p>
-                        {post.likes.includes(user.id) ? <FaStar size={20} onClick={() => handleDislikePost(post.id)} /> : <FaRegStar size={20} onClick={() => handleLikePost(post.id)} />}
+                        <p>{post?.likes?.length}</p>
+                        {post?.likes?.includes(user?.id) ? <FaStar size={20} style={{ cursor: 'pointer' }} onClick={() => handleDislikePost(post?.id)} /> : <FaRegStar style={{ cursor: 'pointer' }} size={20} onClick={() => handleLikePost(post.id)} />}
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 5}}>
                         <p>{post.comments.length}</p>
-                        <FaComment size={20} />
+                        <FaComment size={20} style={{ cursor: 'pointer' }} />
                     </div>
                 </div>
                 <div>
-                    <FaBookmark size={20} />
+                    <FaBookmark size={20} style={{ cursor: 'pointer' }} />
                 </div>
             </div>
         </div>
