@@ -29,6 +29,18 @@ const onCommentPost = async(id, text) => {
     })
     return response.data
 }
+const onBookmarkPost = async(id, _) => {
+    const response = await axios.put('/api/user/bookmark/' + id, _,{
+        headers: AuthHeaderUtil()
+    })
+    return response.data
+}
+const onUnBookmarkPost = async(id, _) => {
+    const response = await axios.put('/api/user/unbookmark/' + id, _,{
+        headers: AuthHeaderUtil()
+    })
+    return response.data
+}
 const onDeletePost = async(id) => {
     const response = await axios.delete('/api/post/' + id, {
         headers: AuthHeaderUtil()
@@ -43,5 +55,7 @@ export const PostService = {
     onLikePost,
     onDislikePost,
     onCommentPost,
+    onBookmarkPost,
+    onUnBookmarkPost,
     onDeletePost
 }

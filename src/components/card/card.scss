@@ -1,12 +1,48 @@
 @use '../../sass/partials/variables';
 @use '../../sass/partials/mixins';
 
+.card2 {
+  width: 100%;
+  background-color: variables.$purple;
+  color: variables.$light;
+  margin: 10px auto;
+  border-radius: 5px;
+  height: 160px;
+  &__header {
+    padding: 15px;
+    @include mixins.flex(flex, center, space-between, 0);
+  }
+  &__content {
+    padding: 15px;
+  }
+  &__footer {
+    padding: 15px;
+    @include mixins.flex(flex, center, space-between, 0);
+  }
+  &__flex {
+    @include mixins.flex(flex, center, none, 5px);
+  }
+
+  &__actions {
+    @include mixins.flex(flex, center, space-between, 25px);
+  }
+
+  &__img__wrapper {
+    width: 30px;
+  }
+  &__img {
+    width: 100%;
+    height: auto;
+  }
+}
+
 .card {
   width: 100%;
   background-color: variables.$purple;
   color: variables.$light;
   margin: 10px auto;
   border-radius: 5px;
+  height: 100%;
   &__flex {
     @include mixins.flex(flex, center, none, 5px);
   }

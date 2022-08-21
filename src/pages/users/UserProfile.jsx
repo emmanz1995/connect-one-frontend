@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import './profile.scss'
 import Navbar from '../../components/navbar/Navbar'
-import moment from 'moment'
+import './users.scss'
 import { UserService } from '../../service/user'
+import { useParams } from 'react-router-dom'
+import moment from 'moment'
 
-const Profile = () => {
-    const [ user, setUser ] = useState({})
+const UserProfile = () => {
+    const [ users, setUsers ] = useState([])
+    const { userId } = useParams()
     useEffect(() => {
-        UserService.getMe().then((response) => {
-            setUser(response)
+        UserService.getAllUsers().then((response) => {
+            setUsers(response)
         }).catch(err => console.log(err))
     }, [])
+
+    const user = users.find((user) => user.id === userId)
+
     return (
-        <div className="profile">
+        <div className="user">
             <Navbar />
-            <div className="profile__user">
-                <div className="profile__header">
+            <div className="user__profile">
+                <div className="user__header">
                     <div style={{ display: 'flex', gap: '20px' }}>
                         <div className="user-img-wrapper">
-                            {user?.avatar ? <img src={user?.avatar} alt="" className="profile-img"/> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="profile-img" />}
+                            {user?.avatar ? <img src={user?.avatar} alt="" className="user-profile-img"/> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="user-profile-img" />}
                         </div>
                         <div>
                             <h3>{user?.name}</h3><br />
@@ -27,7 +32,7 @@ const Profile = () => {
                         </div>
                     </div>
                     <div>
-                        <button className="edit-btn">Edit</button>
+                        <button className="btn-follow">Follow User</button>
                     </div>
                 </div>
                 <div className="post-container">
@@ -44,4 +49,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default UserProfile

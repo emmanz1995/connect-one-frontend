@@ -1,2 +1,21 @@
 @use '../../sass/partials/variables';
 @use '../../sass/partials/mixins';
+
+.profile__user {
+  max-width: 1000px;
+  margin: 10px auto;
+}
+
+.profile__header {
+  @include mixins.flex(flex, center, space-between, 0);
+  border-bottom: 1px solid #ddd;
+}
+
+.edit-btn {
+  padding: 10px 25px;
+  border-radius: 5px;
+  border: none;
+  background-color: variables.$purple;
+  color: variables.$light;
+  cursor: pointer;
+}

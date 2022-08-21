@@ -12,6 +12,19 @@
     width: 60%;
   }
 
+  &__createPost {
+    width: 100%;
+    padding: 20px;
+    background-color: variables.$purple;
+    margin: 10px 0;
+  }
+
+  &__input {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+  }
+
   &__posts {}
 
   &__aside {
@@ -30,22 +43,31 @@
   width: 100%;
   margin-top: 15px;
   border-radius: 5px;
+  color: variables.$purple;
+  h3 {
+    border-bottom: 1px solid variables.$purple;
+    padding: 10px 0;
+  }
 }
 
 .ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  li {
+    border-bottom: 1px solid variables.$purple;
+    padding: 10px 0;
+  }
   &__link {
     text-decoration: none;
-    color: variables.$dark;
+    color: variables.$purple;
   }
 }
 
 .profile-card {
   padding: 15px;
-  background-color: variables.$dark;
-  color: variables.$light;
+  background-color: variables.$light;
+  color: variables.$purple;
   width: 100%;
   border-radius: 5px;
 }
@@ -70,4 +92,28 @@
   background-color: variables.$purple;
   cursor: pointer;
   color: variables.$light;
+}
+
+.post-btn {
+  background-color: variables.$light;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .feed__post__container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .feed__wrapper {
+    width: 100%;
+    padding: 10px;
+  }
+  .feed__aside {
+    width: 100%;
+    display: none;
+  }
 }
