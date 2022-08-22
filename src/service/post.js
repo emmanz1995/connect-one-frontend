@@ -18,25 +18,25 @@ const onLikePost = async(id, _) => {
     return response.data
 }
 const onDislikePost = async(id, _) => {
-    const response = await axios.put('/api/post/dislike/' + id, _, {
+    const response = await axios.put(`/api/post/dislike/${id}`, _, {
         headers: AuthHeaderUtil()
     })
     return response.data
 }
 const onCommentPost = async(id, text) => {
-    const response = await axios.put('/api/post/comment' + id, text,{
+    const response = await axios.put(`/api/post/comment${id}`, text,{
         headers: AuthHeaderUtil()
     })
     return response.data
 }
 const onBookmarkPost = async(id, _) => {
-    const response = await axios.put('/api/user/bookmark/' + id, _,{
+    const response = await axios.put(`/api/user/bookmark/${id}`, _,{
         headers: AuthHeaderUtil()
     })
     return response.data
 }
 const onUnBookmarkPost = async(id, _) => {
-    const response = await axios.put('/api/user/unbookmark/' + id, _,{
+    const response = await axios.put(`/api/user/unbookmark/${id}`, _,{
         headers: AuthHeaderUtil()
     })
     return response.data

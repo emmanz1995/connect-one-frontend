@@ -28,8 +28,8 @@ const Card = ({ post, handleLikePost, handleDislikePost, handleDeletePost }) => 
                     </div>
                     <div className="card__content">
                         <div className="img__wrapper">
-                            <a href="#">
-                                {post?.image ? <img src={post?.image} alt="" className="img" width="600" height="400"/> : ''}
+                            <a href={`/post/${post.id}`}>
+                                <img src={post?.image} alt="" className="img" width="600" height="400" />
                             </a>
                         </div>
                         <span>
