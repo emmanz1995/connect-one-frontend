@@ -29,7 +29,7 @@ const UsersPage = () => {
                         <div key={user.id} className="users__card">
                             <div className="users__cardHeading">
                                 <div className="users__imgWrapper">
-                                    {user.avatar ? <img src={user.avatar} alt="" className="users__userImg"/> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="users__userImg" />}
+                                    {user.avatar ? <img src={user.avatar.url} alt="" className="users__userImg"/> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="users__userImg" />}
                                 </div>
                                 <a className="user-link" href={`/user/${user.id}`}>{user.username}</a>
                             </div>

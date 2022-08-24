@@ -24,7 +24,7 @@ const onDislikePost = async(id, _) => {
     return response.data
 }
 const onCommentPost = async(id, text) => {
-    const response = await axios.put(`/api/post/comment${id}`, text,{
+    const response = await axios.put(`/api/post/comment/${id}`, text,{
         headers: AuthHeaderUtil()
     })
     return response.data

@@ -12,8 +12,8 @@ const Card = ({ post, handleLikePost, handleDislikePost, handleDeletePost }) => 
                     <div className="card__header">
                         <div className="card__flex">
                             <div className="card__img__wrapper">
-                                {post?.postedBy?.avatar?.includes(user?.avatar) ?
-                                    <img src={post?.postedBy.avatar} alt="" className="card__img"/>
+                                {post?.postedBy?.avatar?.url?.includes(user?.avatar?.url) ?
+                                    <img src={post?.postedBy.avatar?.url} alt="" className="card__img"/>
                                     :
                                     <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="card__img"/>
                                 }

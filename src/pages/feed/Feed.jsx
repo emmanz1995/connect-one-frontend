@@ -13,6 +13,7 @@ const Feed = () => {
     const [user, setUser] = useState({})
     const [content, setContent] = useState('')
     const [image, setImage] = useState('')
+    const [message, setMessage] = useState('')
     const [url, setUrl] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
@@ -40,8 +41,15 @@ const Feed = () => {
                     setContent('')
                     setImage('')
                     console.log(payload)
+                    setTimeout(() => {
+                        setMessage('Successfully Created Post!')
+                    }, 5000)
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => {
+                    const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
+                    setMessage(errorMessage)
+                    console.log(errorMessage)
+                })
         }
     }, [url])
 
@@ -58,8 +66,13 @@ const Feed = () => {
                 setLoading(false)
             })
             .catch((err) => {
-                console.log(err)
+                const errorMessage = (err.response && err.response.data && err.response.data.error && err.response.data.error.message) || err || err.error.message.toString()
+                setTimeout(() => {
+                    setMessage('')
+                }, 5000)
+                setMessage(errorMessage)
                 setLoading(false)
+                console.log(errorMessage)
             })
     }
 
@@ -110,6 +123,7 @@ const Feed = () => {
             <Navbar />
             <div className="feed__post__container">
                 <div className="feed__wrapper">
+                    {message && <div className="feed__message">{message}</div>}
                     <div className="feed__createPost">
                         <form>
                             <textarea name="content" id="" cols="30" rows="5" placeholder="Whats on your mind?" className="feed__input" value={content} onChange={(evt) => setContent(evt.target.value)} />
@@ -119,7 +133,7 @@ const Feed = () => {
                     </div>
                     {!loading ?
                         <div>
-                            {posts.map((post) => (
+                            {posts?.length > 0 ? posts?.map((post) => (
                                 <Card
                                     key={post.id}
                                     post={post}
@@ -127,7 +141,7 @@ const Feed = () => {
                                     handleDislikePost={handleDislikePost}
                                     handleDeletePost={handleDeletePost}
                                 />
-                            ))}
+                            )): <p>It's a ghost house here, upload something to break the silence!</p>}
                         </div> : <p>Posts are loading...</p>
                     }
                 </div>
@@ -135,16 +149,16 @@ const Feed = () => {
                     <div className="profile-card">
                         <div className="user-info1">
                             <div className="profile-img-container">
-                                {user.avatar ? <img className="profile-img" src={user.avatar} alt="" width="600" height="400" /> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="profile-img" />}
+                                {user.avatar ? <img className="profile-img" src={user.avatar.url} alt="" width="600" height="400" /> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="profile-img" />}
                             </div>
                             <p><b>{user.name}</b></p>
                             <p>{user.username}</p>
                         </div>
                         <hr />
                         <div>
-                            <p>Joined In: {moment(user.createdAt).format('YYYY/MM/DD')}</p><br/>
+                            <p>Joined In: {moment(user.createdAt).format('DD/MM/YYYY')}</p><br/>
                             <p>{user.email}</p><br/>
-                            <p>Birthday: {moment(user.dob).format('YYYY/MM/DD')}</p>
+                            <p>Birthday: {moment(user.dob).format('DD/MM/YYYY')}</p>
                         </div>
                         <button className="go-profile-btn" onClick={() => navigate('/profile')}>Go to Profile</button>
                     </div>

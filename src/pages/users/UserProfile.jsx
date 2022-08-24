@@ -23,7 +23,7 @@ const UserProfile = () => {
                 <div className="user__header">
                     <div style={{ display: 'flex', gap: '20px' }}>
                         <div className="user-img-wrapper">
-                            {user?.avatar ? <img src={user?.avatar} alt="" className="user-profile-img"/> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="user-profile-img" />}
+                            {user?.avatar ? <img src={user?.avatar.url} alt="" className="user-profile-img"/> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="user-profile-img" />}
                         </div>
                         <div>
                             <h3>{user?.name}</h3><br />

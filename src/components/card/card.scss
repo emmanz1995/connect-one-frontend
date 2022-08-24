@@ -63,11 +63,12 @@
   }
 
   &__img__wrapper {
-    width: 30px;
+    width: 50px;
   }
   &__img {
     width: 100%;
     height: auto;
+    clip-path: circle(40% at 50% 50%);
   }
 }
 

@@ -3,7 +3,7 @@
 
 .singlePost {
   &__wrapper {
-    height: 100vh;
+    height: 90vh;
     @include mixins.flex(flex, center, center, 0);
     padding: 15px;
   }
@@ -17,7 +17,7 @@
 }
 
 .flex-post {
-  width: 50%;
+  width: 75%;
   height: 100%;
   .post-img {
     width: 100%;
@@ -27,11 +27,49 @@
 
 .flex-comment {
   background-color: variables.$purple;
-  width: 50%;
+  width: 35%;
   height: 100%;
   padding: 15px;
   .comment-header {
     @include mixins.flex(flex, center, space-between, 0);
     color: variables.$light;
+  }
+  .comment-content {
+    margin: 30px 0;
+  }
+  .comment-wrapper {
+    overflow: scroll;
+    height: 450px;
+  }
+  .comment-strip {
+    @include mixins.flex(flex, center, space-between, 0);
+    margin: 15px 0;
+  }
+  .comment-action-strip {
+    @include mixins.flex(flex, center, space-between, 0);
+  }
+  .commentForm {
+    margin: 10px 0;
+    @include mixins.flex(flex, center, space-between, 10px);
+    flex: 2;
+    &__input {
+      width: 100%;
+      padding: 7px;
+      border-radius: 5px;
+      border: none;
+      color: variables.$purple;
+    }
+    &__btn {
+      padding: 8px;
+      width: 22%;
+      border-radius: 5px;
+      border: none;
+      color: variables.$purple;
+      cursor: pointer;
+      &:hover {
+        background-color: variables.$light;
+        transition: all 0.2s ease-in-out;
+      }
+    }
   }
 }

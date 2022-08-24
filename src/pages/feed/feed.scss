@@ -12,6 +12,15 @@
     width: 60%;
   }
 
+  &__message {
+    padding: 15px;
+    width: 100%;
+    background-color: variables.$dark;
+    border-radius: 5px;
+    border: 2px solid variables.$purple;
+    color: variables.$purple;
+  }
+
   &__createPost {
     width: 100%;
     padding: 20px;
@@ -81,7 +90,7 @@
 .profile-img {
   width: 100%;
   height: auto;
-  border-radius: 100%;
+  clip-path: circle(40% at 50% 50%);
 }
 .go-profile-btn {
   width: 100%;
