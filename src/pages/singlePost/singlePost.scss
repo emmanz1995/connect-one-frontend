@@ -2,6 +2,7 @@
 @use '../../sass/partials/mixins';
 
 .singlePost {
+  z-index: 1000;
   &__wrapper {
     height: 90vh;
     @include mixins.flex(flex, center, center, 0);

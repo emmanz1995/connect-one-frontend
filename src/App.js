@@ -7,7 +7,6 @@ import Feed from './pages/feed/Feed'
 import UsersPage from './pages/users/UsersPage'
 import UserProfile from './pages/users/UserProfile'
 import Profile from './pages/profile/Profile'
-import SinglePost from './pages/singlePost/SinglePost'
 
 function App() {
   return (
@@ -20,7 +19,7 @@ function App() {
           <Route path="/find-users" element={<UsersPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/user/:userId" element={<UserProfile />} />
-          <Route path="/post/:postId" element={<SinglePost />} />
+          {/*<Route path="/post/:postId" element={<SinglePost />} />*/}
         </Routes>
       </Router>
     </div>

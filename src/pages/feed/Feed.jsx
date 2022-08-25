@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../../components/card/Card'
 import Navbar from '../../components/navbar/Navbar'
 import './feed.scss'
@@ -122,34 +122,11 @@ const Feed = () => {
         <div className="feed">
             <Navbar />
             <div className="feed__post__container">
-                <div className="feed__wrapper">
-                    {message && <div className="feed__message">{message}</div>}
-                    <div className="feed__createPost">
-                        <form>
-                            <textarea name="content" id="" cols="30" rows="5" placeholder="Whats on your mind?" className="feed__input" value={content} onChange={(evt) => setContent(evt.target.value)} />
-                            <input type="file" onChange={handleChange} /> <br /> <br />
-                            <button type="submit" className="post-btn" onClick={postDetails} disabled={loading}>{loading ? 'Loading...' : 'Create Post'}</button>
-                        </form>
-                    </div>
-                    {!loading ?
-                        <div>
-                            {posts?.length > 0 ? posts?.map((post) => (
-                                <Card
-                                    key={post.id}
-                                    post={post}
-                                    handleLikePost={handleLikePost}
-                                    handleDislikePost={handleDislikePost}
-                                    handleDeletePost={handleDeletePost}
-                                />
-                            )): <p>It's a ghost house here, upload something to break the silence!</p>}
-                        </div> : <p>Posts are loading...</p>
-                    }
-                </div>
                 <aside className="feed__aside">
                     <div className="profile-card">
                         <div className="user-info1">
                             <div className="profile-img-container">
-                                {user.avatar ? <img className="profile-img" src={user.avatar.url} alt="" width="600" height="400" /> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="profile-img" />}
+                                {user.avatar ? <img className="profile-img" src={user?.avatar?.url} alt="" width="600" height="400" /> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="profile-img" />}
                             </div>
                             <p><b>{user.name}</b></p>
                             <p>{user.username}</p>
@@ -165,13 +142,43 @@ const Feed = () => {
                     <div className="menu">
                         <h3>Menu</h3>
                         <ul className="ul">
-                            <li><a className="ul__link" href="/feed">Explore</a></li>
-                            <li><a className="ul__link" href="">Profile</a></li>
-                            <li><a className="ul__link" href="">Settings</a></li>
-                            <li><a className="ul__link" href="/find-users">Find Users</a></li>
+                            <li><a className="ul__link" href="/feed"><b>Explore</b></a></li>
+                            <li><a className="ul__link" href=""><b>Profile</b></a></li>
+                            <li><a className="ul__link" href=""><b>Settings</b></a></li>
+                            <li><a className="ul__link" href="/find-users"><b>Find Users</b></a></li>
                         </ul>
                     </div>
                 </aside>
+                <div className="feed__wrapper">
+                    {message && <div className="feed__message">{message}</div>}
+                    <div className="feed__createPost">
+                        <form>
+                            <textarea name="content" id="" cols="30" rows="5" placeholder="Whats on your mind?" className="feed__input" value={content} onChange={(evt) => setContent(evt.target.value)} />
+                            <input type="file" id="yourBtn" onChange={handleChange} /> <br /> <br />
+                            <button type="submit" className="post-btn" onClick={postDetails} disabled={loading}>{loading ? 'Loading...' : 'Create Post'}</button>
+                        </form>
+                    </div>
+                    {!loading ?
+                        <div>
+                            {posts?.length > 0 ? posts?.map((post) => (
+                                <>
+                                    <Card
+                                        key={post.id}
+                                        post={post}
+                                        handleLikePost={handleLikePost}
+                                        handleDislikePost={handleDislikePost}
+                                        handleDeletePost={handleDeletePost}
+                                    />
+                                </>
+                            )): <p>It's a ghost house here, upload something to break the silence!</p>}
+                        </div> : <p>Posts are loading...</p>
+                    }
+                </div>
+                <div className="feed__aside2">
+                    <div className="user-card">
+                        <h3>Users</h3>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -36,7 +36,7 @@ const Profile = () => {
                     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 20, margin: '10px 0' }}>
                         {user?.post?.length > 0 ? user?.post?.map((post) => (
                             <div className="post-img-wrapper">
-                                <img className="post-img" src={post?.image?.url} alt="" width="600" height="400" onClick={() => navigate(`/post/${post?.id}`)} />
+                                <img className="post-img" src={post?.image} alt="" width="600" height="400" onClick={() => navigate(`/post/${post?.id}`)} />
                             </div>
                         )): <p>User has no posts, sorry!</p>}
                     </div>

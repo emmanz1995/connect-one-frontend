@@ -3,22 +3,35 @@
 
 .navbar {
   width: 100%;
-  background-color: variables.$purple;
+  background-color: variables.$light;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
   &__wrapper {
-    max-width: 1000px;
+    max-width: 1400px;
     margin: 0 auto;
     @include mixins.flex(flex, center, space-between, 0);
   }
   &__header {
-    color: variables.$light;
+    color: variables.$purple;
   }
   &__ul {
     list-style: none;
     @include mixins.flex(flex, center, space-between, 25px);
-    color: variables.$light;
+    color: variables.$purple;
+    margin: 7px;
   }
   &__link {
     text-decoration: none;
-    color: variables.$light;
+    color: variables.$purple;
+  }
+  .avatar-wrapper {
+    width: 50px;
+    .avatar {
+      width: 100%;
+      height: auto;
+      clip-path: circle(40% at 50% 50%);
+    }
   }
 }

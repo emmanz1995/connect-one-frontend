@@ -38,11 +38,12 @@
 
 .card {
   width: 100%;
-  background-color: variables.$purple;
-  color: variables.$light;
+  background-color: #fff;
+  color: variables.$purple;
   margin: 10px auto;
   border-radius: 5px;
   height: 100%;
+  box-shadow: rgb(0 0 0 / 20%) 0 3px 10px;
   &__flex {
     @include mixins.flex(flex, center, none, 5px);
   }
@@ -85,5 +86,5 @@
 
 .link {
   text-decoration: none;
-  color: variables.$light;
+  color: variables.$purple;
 }
