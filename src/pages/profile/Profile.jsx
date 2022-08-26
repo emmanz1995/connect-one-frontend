@@ -4,10 +4,13 @@ import Navbar from '../../components/navbar/Navbar'
 import moment from 'moment'
 import { UserService } from '../../service/user'
 import { useNavigate } from 'react-router-dom'
+import useOpenModal from '../../hooks/useOpenModal'
+import SinglePost from '../singlePost/SinglePost'
 
 const Profile = () => {
     const [ user, setUser ] = useState({})
     const navigate = useNavigate()
+    const { reveal, setReveal, handleReveal, handleHide } = useOpenModal()
     useEffect(() => {
         UserService.getMe().then((response) => {
             setUser(response)
@@ -35,9 +38,12 @@ const Profile = () => {
                 <div className="post-container">
                     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 20, margin: '10px 0' }}>
                         {user?.post?.length > 0 ? user?.post?.map((post) => (
-                            <div className="post-img-wrapper">
-                                <img className="post-img" src={post?.image} alt="" width="600" height="400" onClick={() => navigate(`/post/${post?.id}`)} />
-                            </div>
+                            <>
+                                <div className="post-img-wrapper">
+                                    <img className="post-img" src={post?.image} alt="" width="600" height="400" onClick={() => handleReveal()} />
+                                </div>
+                                {reveal && ( <SinglePost postId={post.id} /> )}
+                            </>
                         )): <p>User has no posts, sorry!</p>}
                     </div>
                 </div>

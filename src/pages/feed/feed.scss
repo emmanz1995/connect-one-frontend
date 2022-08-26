@@ -66,7 +66,7 @@
     padding: 15px;
     border-radius: 5px;
     color: $purple;
-    z-index: -1;
+    //z-index: -1;
   }
 }
 
@@ -89,7 +89,6 @@
   padding: 0;
   margin: 0;
   li {
-    background-color: rgba(207, 207, 207, 0.34);
     border-radius: 5px;
     margin: 10px 0;
     padding: 10px;
@@ -98,6 +97,10 @@
     text-decoration: none;
     color: $purple;
     width: 100%;
+    &:hover {
+      color: $dark;
+      transition: all 0.2s ease-in-out;
+    }
   }
 }
 
@@ -117,6 +120,23 @@
   width: 100%;
   border-radius: 5px;
   box-shadow: rgb(0 0 0 / 20%) 0 3px 10px;
+  .card-user {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    .user-image-wrapper {
+      width: 40px;
+      .user-image {
+        height: auto;
+        width: 100%;
+      }
+    }
+  }
 }
 
 .user-info1 {

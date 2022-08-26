@@ -7,26 +7,25 @@ import { UserService } from '../../service/user'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { getPosts, createPosts } from '../../app/action/postAction'
 
 const Feed = () => {
-    const [posts, setPosts] = useState([])
+    // const [posts, setPosts] = useState([])
     const [user, setUser] = useState({})
+    const [users, setUsers] = useState([])
     const [content, setContent] = useState('')
     const [image, setImage] = useState('')
     const [message, setMessage] = useState('')
     const [url, setUrl] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const { posts, loading } = useSelector((state) => state.posts)
 
     useEffect(() => {
-        setLoading(true)
-        PostService.getPosts().then((response) => {
-            setPosts(response)
-            setLoading(false)
-        }).catch(err => {
-            console.log(err)
-            setLoading(false)
-        })
+        dispatch(getPosts())
     }, [])
 
     useEffect(() => {
@@ -35,23 +34,9 @@ const Feed = () => {
                 content: content,
                 image: url
             }
-            PostService.onCreatePost(formData)
-                .then((payload) => {
-                    setPosts([ ...posts, payload ])
-                    setContent('')
-                    setImage('')
-                    console.log(payload)
-                    setTimeout(() => {
-                        setMessage('Successfully Created Post!')
-                    }, 5000)
-                })
-                .catch((err) => {
-                    const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
-                    setMessage(errorMessage)
-                    console.log(errorMessage)
-                })
+            dispatch(createPosts(formData))
         }
-    }, [url])
+    }, [url, dispatch])
 
     const postDetails = (evt) => {
         evt.preventDefault()
@@ -59,11 +44,11 @@ const Feed = () => {
         formData.append('file', image)
         formData.append('upload_preset', 'connect-one')
         formData.append('cloud_name', 'emmanuel-cloud-storage')
-        setLoading(true)
+        setIsLoading(true)
         axios.post('https://api.cloudinary.com/v1_1/emmanuel-cloud-storage/image/upload', formData)
             .then((response) => {
                 setUrl(response?.data?.secure_url)
-                setLoading(false)
+                setIsLoading(false)
             })
             .catch((err) => {
                 const errorMessage = (err.response && err.response.data && err.response.data.error && err.response.data.error.message) || err || err.error.message.toString()
@@ -71,7 +56,7 @@ const Feed = () => {
                     setMessage('')
                 }, 5000)
                 setMessage(errorMessage)
-                setLoading(false)
+                // setLoading(false)
                 console.log(errorMessage)
             })
     }
@@ -80,7 +65,7 @@ const Feed = () => {
         try {
             const payload = await PostService.onLikePost(id)
             const like = posts.map((post) => post.id === payload.id ? { ...payload } : post)
-            setPosts(like)
+            // setPosts(like)
         } catch(err) {
             const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
             console.log(errorMessage)
@@ -90,7 +75,7 @@ const Feed = () => {
         try {
             const payload = await PostService.onDislikePost(id)
             const like = posts.map((post) => post.id === id ? { ...payload } : post)
-            setPosts(like)
+            // setPosts(like)
         } catch(err) {
             const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
             console.log(errorMessage)
@@ -101,7 +86,7 @@ const Feed = () => {
         try {
             const payload = await PostService.onDeletePost(id)
             const filterOutPost = posts.filter((post) => post.id !== payload.id)
-            setPosts(filterOutPost)
+            // setPosts(filterOutPost)
         } catch(err) {
             const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
             console.log(errorMessage)
@@ -117,6 +102,14 @@ const Feed = () => {
             setUser(response)
         }).catch(err => console.log(err))
     }, [])
+
+    useEffect(() => {
+        UserService.getAllUsers().then((response) => {
+            setUsers(response)
+        }).catch((err) => console.log(err))
+    }, [])
+
+    const filterOutCurrentUser = users.filter((u) => u.id !== user.id)
 
     return (
         <div className="feed">
@@ -155,7 +148,7 @@ const Feed = () => {
                         <form>
                             <textarea name="content" id="" cols="30" rows="5" placeholder="Whats on your mind?" className="feed__input" value={content} onChange={(evt) => setContent(evt.target.value)} />
                             <input type="file" id="yourBtn" onChange={handleChange} /> <br /> <br />
-                            <button type="submit" className="post-btn" onClick={postDetails} disabled={loading}>{loading ? 'Loading...' : 'Create Post'}</button>
+                            <button type="submit" className="post-btn" onClick={postDetails} disabled={isLoading}>{isLoading ? 'Loading...' : 'Create Post'}</button>
                         </form>
                     </div>
                     {!loading ?
@@ -176,7 +169,20 @@ const Feed = () => {
                 </div>
                 <div className="feed__aside2">
                     <div className="user-card">
-                        <h3>Users</h3>
+                        <h3>Users to follow</h3>
+                        <div>
+                            {filterOutCurrentUser?.length > 0 ? filterOutCurrentUser?.map((user) => (
+                                <a href="#" className="card-user">
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                        <div className="user-image-wrapper">
+                                            <img src={user?.avatar?.url} alt="" className="user-image" width="600" height="400" />
+                                        </div>
+                                        {user?.username}
+                                    </div>
+                                    <button className="follow-btn">Follow</button>
+                                </a>
+                            )): <p>No users to follow!</p>}
+                        </div>
                     </div>
                 </div>
             </div>

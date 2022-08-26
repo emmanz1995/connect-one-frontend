@@ -5,6 +5,7 @@
   z-index: 1000;
   &__wrapper {
     height: 90vh;
+    color: variables.$light;
     @include mixins.flex(flex, center, center, 0);
     padding: 15px;
   }
