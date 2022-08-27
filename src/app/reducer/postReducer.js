@@ -38,6 +38,34 @@ const postReducer = (state = initialState, action) => {
             return {
                 error: payload
             }
+        case types.SUCCESS_LIKE_POST:
+            return {
+                posts: [
+                    ...state.posts.map((post) => {
+                        return post.id === payload.id ? { ...post, ...payload } : post
+                    })
+                ],
+                loading: false
+            }
+        case types.ERROR_LIKE_POST:
+            return {
+                ...state,
+                error: payload
+            }
+        case types.SUCCESS_DISLIKE_POST:
+            return {
+                ...state,
+                posts: [
+                    ...state.posts.map((post) => {
+                        return post.id === payload.id ? { ...post, ...payload } : post
+                    })
+                ],
+                loading: false
+            }
+            case types.ERROR_DISLIKE_POST:
+                return {
+                    error: payload
+                }
         default: return state
     }
 }

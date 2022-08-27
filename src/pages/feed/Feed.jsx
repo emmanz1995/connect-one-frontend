@@ -8,7 +8,7 @@ import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { getPosts, createPosts } from '../../app/action/postAction'
+import { getPosts, createPosts, likePost, dislikePost } from '../../app/action/postAction'
 
 const Feed = () => {
     // const [posts, setPosts] = useState([])
@@ -62,14 +62,15 @@ const Feed = () => {
     }
 
     const handleLikePost = async (id) => {
-        try {
-            const payload = await PostService.onLikePost(id)
-            const like = posts.map((post) => post.id === payload.id ? { ...payload } : post)
-            // setPosts(like)
-        } catch(err) {
-            const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
-            console.log(errorMessage)
-        }
+        dispatch(likePost(id))
+        // try {
+        //     // const payload = await PostService.onLikePost(id)
+        //     // const like = posts.map((post) => post.id === payload.id ? { ...payload } : post)
+        //     // // setPosts(like)
+        // } catch(err) {
+        //     const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
+        //     console.log(errorMessage)
+        // }
     }
     const handleDislikePost = async (id) => {
         try {
