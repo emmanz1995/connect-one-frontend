@@ -56,42 +56,8 @@ const Feed = () => {
                     setMessage('')
                 }, 5000)
                 setMessage(errorMessage)
-                // setLoading(false)
                 console.log(errorMessage)
             })
-    }
-
-    const handleLikePost = async (id) => {
-        dispatch(likePost(id))
-        // try {
-        //     // const payload = await PostService.onLikePost(id)
-        //     // const like = posts.map((post) => post.id === payload.id ? { ...payload } : post)
-        //     // // setPosts(like)
-        // } catch(err) {
-        //     const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
-        //     console.log(errorMessage)
-        // }
-    }
-    const handleDislikePost = async (id) => {
-        try {
-            const payload = await PostService.onDislikePost(id)
-            const like = posts.map((post) => post.id === id ? { ...payload } : post)
-            // setPosts(like)
-        } catch(err) {
-            const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
-            console.log(errorMessage)
-        }
-    }
-
-    const handleDeletePost = async (id) => {
-        try {
-            const payload = await PostService.onDeletePost(id)
-            const filterOutPost = posts.filter((post) => post.id !== payload.id)
-            // setPosts(filterOutPost)
-        } catch(err) {
-            const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
-            console.log(errorMessage)
-        }
     }
 
     const handleChange = (evt) => {
@@ -159,9 +125,6 @@ const Feed = () => {
                                     <Card
                                         key={post.id}
                                         post={post}
-                                        handleLikePost={handleLikePost}
-                                        handleDislikePost={handleDislikePost}
-                                        handleDeletePost={handleDeletePost}
                                     />
                                 </>
                             )): <p>It's a ghost house here, upload something to break the silence!</p>}

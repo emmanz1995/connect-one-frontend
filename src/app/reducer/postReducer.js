@@ -66,6 +66,43 @@ const postReducer = (state = initialState, action) => {
                 return {
                     error: payload
                 }
+            case types.SUCCESS_BOOKMARK_POST:
+                return {
+                    posts: [
+                        ...state.posts.map((post) => {
+                            return post.id === payload.id ? { ...post, ...payload } : post
+                        })
+                    ],
+                    loading: false
+                }
+            case types.ERROR_BOOKMARK_POST:
+                return {
+                    error: payload,
+                    loading: false
+                }
+            case types.SUCCESS_UNBOOKMARK_POST:
+                return {
+                    posts: [
+                        ...state.posts.map((post) => post.id === payload.id ? { ...post, ...payload } : post)
+                    ],
+                    loading: false
+                }
+            case types.ERROR_UNBOOKMARK_POST:
+                return {
+                    error: payload,
+                    loading: false
+                }
+            case types.SUCCESS_DELETE_POST:
+                return {
+                    posts: [
+                        ...state.posts.filter((post) => post.id !== payload.id)
+                    ],
+                    loading: false
+                }
+            case types.ERROR_DELETE_POST:
+                return {
+                    error: payload
+                }
         default: return state
     }
 }

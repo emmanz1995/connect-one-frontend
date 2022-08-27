@@ -1,14 +1,36 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './card.scss'
 import { FaTrash, FaStar, FaRegStar, FaComment, FaBookmark, FaRegBookmark } from 'react-icons/fa'
 import { AuthService } from '../../service/auth'
 import SinglePost from '../../pages/singlePost/SinglePost'
 import useOpenModal from '../../hooks/useOpenModal'
+import { useDispatch } from 'react-redux'
+import { likePost, dislikePost, deletePost, bookmarkPost, unBookmarkPost } from '../../app/action/postAction'
 
 const Card = (props) => {
-    const { post, handleLikePost, handleDislikePost, handleDeletePost } = props
+    const { post } = props
     const user = AuthService.getCurrentUser()
-    const { reveal, setReveal, handleReveal, handleHide } = useOpenModal()
+    const { reveal, handleReveal, handleHide } = useOpenModal()
+    const dispatch = useDispatch()
+
+    const handleLikePost = (id) => {
+        dispatch(likePost(id))
+    }
+
+    const handleDislikePost = (id) => {
+        dispatch(dislikePost(id))
+    }
+
+    const handleDeletePost = (id) => {
+        dispatch(deletePost(id))
+    }
+
+    const handleBookmarkPost = (id) => {
+        dispatch(bookmarkPost(id))
+    }
+    const handleUnBookmarkPost = (id) => {
+        dispatch(unBookmarkPost(id))
+    }
 
     return (
         <div className="card">
@@ -41,13 +63,13 @@ const Card = (props) => {
                         <p>{post?.likes?.length}</p>
                         {post?.likes?.includes(user?.id) ? <FaStar size={20} style={{ cursor: 'pointer' }} onClick={() => handleDislikePost(post?.id)} /> : <FaRegStar style={{ cursor: 'pointer' }} size={20} onClick={() => handleLikePost(post.id)} />}
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 5}}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                         <p>{post.comments.length}</p>
                         <FaComment size={20} style={{ cursor: 'pointer' }} />
                     </div>
                 </div>
                 <div>
-                    <FaBookmark size={20} style={{ cursor: 'pointer' }} />
+                    {post?.bookmarks?.includes(user?.id) ? <FaBookmark size={20} style={{ cursor: 'pointer' }} onClick={() => handleUnBookmarkPost(post.id)} /> : <FaRegBookmark size={20} style={{ cursor: 'pointer' }} onClick={() => handleBookmarkPost(post.id)} />}
                 </div>
             </div>
             {reveal && <SinglePost postId={post.id} post={post} handleLikePost={handleLikePost} handleHide={handleHide} />}

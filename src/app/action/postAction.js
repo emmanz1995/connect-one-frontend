@@ -64,3 +64,54 @@ export const dislikePost = (id) => async (dispatch) => {
         })
     }
 }
+
+export const bookmarkPost = (id) => async (dispatch) => {
+    try {
+        const response = await PostService.onBookmarkPost(id)
+        dispatch({
+            type: types.SUCCESS_BOOKMARK_POST,
+            payload: response
+        })
+    } catch(err) {
+        const errorMessage = (err?.response && err?.response?.data && err?.response?.data?.msg) || err || err?.msg.toString()
+        console.log(errorMessage)
+        dispatch({
+            type: types.ERROR_BOOKMARK_POST,
+            payload: errorMessage
+        })
+    }
+}
+
+export const unBookmarkPost = (id) => async (dispatch) => {
+    try {
+        const response = await PostService.onUnBookmarkPost(id)
+        dispatch({
+            type: types.SUCCESS_UNBOOKMARK_POST,
+            payload: response
+        })
+    } catch(err) {
+        const errorMessage = (err?.response && err?.response?.data && err?.response?.data?.msg) || err || err?.msg.toString()
+        console.log(errorMessage)
+        dispatch({
+            type: types.ERROR_UNBOOKMARK_POST,
+            payload: errorMessage
+        })
+    }
+}
+
+export const deletePost = (id) => async (dispatch) => {
+    try {
+        const response = await PostService.onDeletePost(id)
+        dispatch({
+            type: types.SUCCESS_DELETE_POST,
+            payload: response
+        })
+    } catch(err) {
+        const errorMessage = (err?.response && err?.response?.data && err?.response?.data?.msg) || err || err?.msg.toString()
+        console.log(errorMessage)
+        dispatch({
+            type: types.ERROR_DELETE_POST,
+            payload: errorMessage
+        })
+    }
+}
