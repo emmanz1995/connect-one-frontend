@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Card from '../../components/card/Card'
 import Navbar from '../../components/navbar/Navbar'
 import './feed.scss'
-import { PostService } from '../../service/post'
 import { UserService } from '../../service/user'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { getPosts, createPosts, likePost, dislikePost } from '../../app/action/postAction'
+import { getPosts, createPosts } from '../../app/action/postAction'
 
 const Feed = () => {
-    // const [posts, setPosts] = useState([])
     const [user, setUser] = useState({})
     const [users, setUsers] = useState([])
     const [content, setContent] = useState('')
