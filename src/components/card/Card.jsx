@@ -37,7 +37,7 @@ const Card = (props) => {
             <div className="card__header">
                 <div className="card__flex">
                     <div className="card__img__wrapper">
-                        <img src={post?.postedBy.avatar?.url} alt="" className="card__img"/>
+                        <img src={post?.postedBy?.avatar?.url} alt="" className="card__img"/>
                     </div>
                     <a href="#" className="link">{post?.postedBy?.username}</a>
                 </div>

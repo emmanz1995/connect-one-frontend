@@ -80,6 +80,7 @@ const postReducer = (state = initialState, action) => {
                     error: payload,
                     loading: false
                 }
+            case types.SUCCESS_COMMENT_POST:
             case types.SUCCESS_UNBOOKMARK_POST:
                 return {
                     posts: [
@@ -87,6 +88,7 @@ const postReducer = (state = initialState, action) => {
                     ],
                     loading: false
                 }
+            case types.ERROR_COMMENT_POST:
             case types.ERROR_UNBOOKMARK_POST:
                 return {
                     error: payload,

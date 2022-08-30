@@ -84,23 +84,24 @@ const Feed = () => {
                     <div className="profile-card">
                         <div className="user-info1">
                             <div className="profile-img-container">
-                                {user.avatar ? <img className="profile-img" src={user?.avatar?.url} alt="" width="600" height="400" /> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="profile-img" />}
+                                {user?.avatar ? <img className="profile-img" src={user?.avatar?.url} alt="" width="600" height="400" /> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="profile-img" />}
                             </div>
-                            <p><b>{user.name}</b></p>
-                            <p>{user.username}</p>
+                            <p><b>{user?.name}</b></p>
+                            <p>{user?.username}</p>
                         </div>
                         <hr />
                         <div>
-                            <p>Joined In: {moment(user.createdAt).format('DD/MM/YYYY')}</p><br/>
-                            <p>{user.email}</p><br/>
-                            <p>Birthday: {moment(user.dob).format('DD/MM/YYYY')}</p>
+                            <p>Joined In: {moment(user?.createdAt).format('DD/MM/YYYY')}</p><br/>
+                            <p>{user?.email}</p><br/>
+                            <p>Birthday: {moment(user?.dob).format('DD/MM/YYYY')}</p>
                         </div>
                         <button className="go-profile-btn" onClick={() => navigate('/profile')}>Go to Profile</button>
                     </div>
                     <div className="menu">
                         <h3>Menu</h3>
                         <ul className="ul">
-                            <li><a className="ul__link" href="/feed"><b>Explore</b></a></li>
+                            <li><a className="ul__link" href="/feed"><b>Feed</b></a></li>
+                            <li><a className="ul__link" href="/explore"><b>Explore</b></a></li>
                             <li><a className="ul__link" href=""><b>Profile</b></a></li>
                             <li><a className="ul__link" href=""><b>Settings</b></a></li>
                             <li><a className="ul__link" href="/find-users"><b>Find Users</b></a></li>

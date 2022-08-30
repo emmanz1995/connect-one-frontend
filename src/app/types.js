@@ -24,6 +24,7 @@ export const ERROR_UNBOOKMARK_POST = 'ERROR_UNBOOKMARK_POST'
 export const SUCCESS_DELETE_POST = 'SUCCESS_DELETE_POST'
 export const ERROR_DELETE_POST = 'ERROR_DELETE_POST'
 
+/*-------------------------------------------------- user types ------------------------------------------------------*/
 
 export const SUCCESS_FOLLOW_USER = 'SUCCESS_FOLLOW_USER'
 export const ERROR_FOLLOW_USER = 'ERROR_FOLLOW_USER'
