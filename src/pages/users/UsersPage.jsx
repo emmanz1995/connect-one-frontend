@@ -3,17 +3,41 @@ import './users.scss'
 import Navbar from '../../components/navbar/Navbar'
 import { UserService } from '../../service/user'
 import { AuthService } from '../../service/auth'
+import { useDispatch } from 'react-redux'
+import { followUser, unFollowUser } from '../../app/action/userAction'
 
 const UsersPage = () => {
+    const dispatch = useDispatch()
     const [ users, setUsers ] = useState([])
+    const [userInfo, setUserInfo] = useState({})
     const currentUser = AuthService.getCurrentUser()
-    useEffect(() => {
+
+    const getAllUser = () => {
         UserService.getAllUsers().then((response) => {
             setUsers(response)
         }).catch(err => console.log(err))
+    }
+
+    const getMe = () => {
+        UserService.getMe().then((response) => {
+            setUserInfo(response)
+        }).catch((error) => console.log(error))
+    }
+
+    useEffect(() => {
+        getAllUser()
+        getMe()
     }, [])
 
     const filterUsers = users.filter((user) => ( user.id !== currentUser.id ))
+
+    const handleFollowUser = (id) => {
+        dispatch(followUser(id))
+    }
+
+    const handleUnFollowUser = (id) => {
+        dispatch(unFollowUser(id))
+    }
 
     return (
         <div className="users">
@@ -34,7 +58,7 @@ const UsersPage = () => {
                                 <a className="user-link" href={`/user/${user.id}`}>{user.username}</a>
                             </div>
                             <div>
-                                <button className="follow-btn">Follow</button>
+                                {userInfo?.following?.includes(user?.id) ? <button className="follow-btn" onClick={() => handleUnFollowUser(user.id)}>UnFollow</button> : <button className="follow-btn" onClick={() => handleFollowUser(user.id)}>Follow</button>}
                             </div>
                         </div>
                     ))}

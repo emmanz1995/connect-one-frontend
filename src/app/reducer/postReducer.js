@@ -1,4 +1,5 @@
 import * as types from '../types'
+import {ERROR_GET_FEED_POSTS} from "../types";
 
 const initialState = {
     posts: [],
@@ -9,19 +10,21 @@ const initialState = {
 
 const postReducer = (state = initialState, action) => {
     const { type, payload } = action
-    console.log(state)
     switch(type) {
         case types.REQUEST_POST:
             return {
                 ...state,
                 loading: true
             }
+
+        // case types.SUCCESS_GET_FEED_POSTS:
         case types.SUCCESS_GET_POSTS:
             return {
                 ...state,
                 posts: payload,
                 loading: false
             }
+        // case types.ERROR_GET_FEED_POSTS:
         case types.ERROR_GET_POSTS:
             return {
                 ...state,

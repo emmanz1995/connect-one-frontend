@@ -5,6 +5,12 @@ const getPosts = async() => {
     const response = await axios.get('/api/post')
     return response.data
 }
+const getFeedPosts = async() => {
+    const response = await axios.get('/api/post/getposts', {
+        headers: AuthHeaderUtil()
+    })
+    return response.data
+}
 const onCreatePost = async(formData) => {
     const response = await axios.post('/api/post', formData, {
         headers: AuthHeaderUtil()
@@ -51,6 +57,7 @@ const onDeletePost = async(id) => {
 
 export const PostService = {
     getPosts,
+    getFeedPosts,
     onCreatePost,
     onLikePost,
     onDislikePost,

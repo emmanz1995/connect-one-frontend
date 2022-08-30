@@ -8,15 +8,18 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { getPosts, createPosts } from '../../app/action/postAction'
+import { followUser, unFollowUser } from "../../app/action/userAction";
 
 const Feed = () => {
     const [user, setUser] = useState({})
     const [users, setUsers] = useState([])
+
     const [content, setContent] = useState('')
     const [image, setImage] = useState('')
     const [message, setMessage] = useState('')
     const [url, setUrl] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -76,6 +79,15 @@ const Feed = () => {
 
     const filterOutCurrentUser = users.filter((u) => u.id !== user.id)
 
+    const handleFollowUser = (id) => {
+        dispatch(followUser(id))
+        console.log(id)
+    }
+
+    const handleUnFollowUser = (id) => {
+        dispatch(unFollowUser(id))
+    }
+
     return (
         <div className="feed">
             <Navbar />
@@ -134,15 +146,15 @@ const Feed = () => {
                     <div className="user-card">
                         <h3>Users to follow</h3>
                         <div>
-                            {filterOutCurrentUser?.length > 0 ? filterOutCurrentUser?.map((user) => (
+                            {filterOutCurrentUser?.length > 0 ? filterOutCurrentUser?.map((u) => (
                                 <a href="#" className="card-user">
                                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                         <div className="user-image-wrapper">
-                                            <img src={user?.avatar?.url} alt="" className="user-image" width="600" height="400" />
+                                            <img src={u?.avatar?.url} alt="" className="user-image" width="600" height="400" />
                                         </div>
-                                        {user?.username}
+                                        {u?.username}
                                     </div>
-                                    <button className="follow-btn">Follow</button>
+                                    {u?.follower?.includes(user?.id) ? <button className="follow-btn" onClick={() => handleUnFollowUser(u?.id)}>Unfollow</button> : <button className="follow-btn" onClick={() => handleFollowUser(u?.id)}>Follow</button>}
                                 </a>
                             )): <p>No users to follow!</p>}
                         </div>

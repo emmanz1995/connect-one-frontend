@@ -16,6 +16,24 @@ export const getPosts = () => async (dispatch) => {
     }
 }
 
+export const feedPosts = () => async (dispatch) => {
+    try {
+        dispatch({ type: types.REQUEST_POST })
+        const response = await PostService.getFeedPosts()
+        dispatch({
+            type: types.SUCCESS_GET_FEED_POSTS,
+            payload: response
+        })
+    } catch(err) {
+        const errorMessage = (err?.response && err?.response?.data && err?.response?.data?.msg) || err || err?.msg.toString()
+        console.log(errorMessage)
+        dispatch({
+            type: types.ERROR_GET_FEED_POSTS,
+            payload: errorMessage
+        })
+    }
+}
+
 export const createPosts = (formData) => async (dispatch) => {
     try {
         // dispatch({ type: types.REQUEST_POST })
