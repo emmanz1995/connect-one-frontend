@@ -21,7 +21,7 @@ const Login = () => {
         const { email, password } = formValues
         try {
             await AuthService.onLogin({ email: email, password: password })
-            navigate('/feed')
+            navigate('/explore')
             setError('')
         } catch(err){
             const errorMessage = (err.response && err.response.data && err.response.data.msg) || err || err.msg.toString()
@@ -31,7 +31,7 @@ const Login = () => {
     }
 
     if(AuthService.getCurrentUser()) {
-       return <Navigate to={{ pathname: '/feed' }} />
+       return <Navigate to={{ pathname: '/explore' }} />
     }
     return (
         <div className="login">

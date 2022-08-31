@@ -1,10 +1,10 @@
 import * as types from '../types'
-import {ERROR_GET_FEED_POSTS} from "../types";
 
 const initialState = {
     posts: [],
     message: '',
-    loading: false
+    loading: false,
+    timeline: []
 }
 
 
@@ -17,14 +17,24 @@ const postReducer = (state = initialState, action) => {
                 loading: true
             }
 
-        // case types.SUCCESS_GET_FEED_POSTS:
+        case types.SUCCESS_GET_FEED_POSTS:
+            return {
+                ...state,
+                timeline: payload,
+                loading: false
+            }
         case types.SUCCESS_GET_POSTS:
             return {
                 ...state,
                 posts: payload,
                 loading: false
             }
-        // case types.ERROR_GET_FEED_POSTS:
+        case types.ERROR_GET_FEED_POSTS:
+            return {
+                timeline: [],
+                error: payload,
+                loading: false
+            }
         case types.ERROR_GET_POSTS:
             return {
                 ...state,

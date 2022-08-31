@@ -29,6 +29,11 @@ const Profile = () => {
                             <h3>{user?.name}</h3><br />
                             <p>{user?.username}</p><br />
                             <p>Birthday: {moment(user?.dob).format('DD/MM/YYYY')}</p>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '20px 0'}}>
+                                <p>Following {user?.following?.length}</p>
+                                <p>Followers {user?.follower?.length}</p>
+                                <p>posts {user?.post?.length}</p>
+                            </div>
                         </div>
                     </div>
                     <div>

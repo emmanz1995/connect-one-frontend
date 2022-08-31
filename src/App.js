@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.scss'
 import Login from './pages/login/Login'
 import Register from './pages/register/Register'
-import Feed from './pages/feed/Feed'
+import Explore from './pages/explore/Explore'
 import UsersPage from './pages/users/UsersPage'
 import UserProfile from './pages/users/UserProfile'
 import Profile from './pages/profile/Profile'
+import Feed from './pages/feed/Feed'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/feed" element={<Feed />} />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/find-users" element={<UsersPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/user/:userId" element={<UserProfile />} />

@@ -7,7 +7,7 @@
 }
 
 .profile__header {
-  @include mixins.flex(flex, center, space-between, 0);
+  @include mixins.flex(flex, top, space-between, 0);
   border-bottom: 1px solid #ddd;
 }
 
