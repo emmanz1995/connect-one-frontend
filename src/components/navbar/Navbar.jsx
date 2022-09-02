@@ -18,9 +18,9 @@ const Navbar = () => {
                     <h2 className="navbar__title">Connect One</h2>
                 </div>
                 <ul className="navbar__ul">
-                    <li><a className="navbar__link" href="/feed"><FaHome size={30} /></a></li>
-                    <li><a className="navbar__link" href="/explore"><FaCompass size={30} /></a></li>
-                    <li><a className="navbar__link" href=""><FaSignOutAlt onClick={handleSignout} size={30} /></a></li>
+                    <li><a className="navbar__link" href="/feed"><FaHome size={20} /></a></li>
+                    <li><a className="navbar__link" href="/explore"><FaCompass size={20} /></a></li>
+                    <li><a className="navbar__link" href=""><FaSignOutAlt onClick={handleSignout} size={20} /></a></li>
                     <li>
                         <a className="navbar__link" href="/profile" style={{ color: '#FAFBFF', width: '100%' }}>
                             <div>

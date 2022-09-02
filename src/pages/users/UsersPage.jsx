@@ -58,7 +58,7 @@ const UsersPage = () => {
                                 <a className="user-link" href={`/user/${user.id}`}>{user.username}</a>
                             </div>
                             <div>
-                                {userInfo?.following?.includes(user?.id) ? <button className="follow-btn" onClick={() => handleUnFollowUser(user.id)}>UnFollow</button> : <button className="follow-btn" onClick={() => handleFollowUser(user.id)}>Follow</button>}
+                                {user?.follower?.includes(userInfo?.id) ? <button className="follow-btn" onClick={() => handleUnFollowUser(user.id)}>Unfollow</button> : <button className="follow-btn" onClick={() => handleFollowUser(user.id)}>Follow</button>}
                             </div>
                         </div>
                     ))}

@@ -4,17 +4,39 @@ import './users.scss'
 import { UserService } from '../../service/user'
 import { useParams } from 'react-router-dom'
 import moment from 'moment'
+import { followUser, unFollowUser } from '../../app/action/userAction'
+import { useDispatch } from 'react-redux'
 
 const UserProfile = () => {
     const [ users, setUsers ] = useState([])
+    const [ me, setMe ] = useState({})
     const { userId } = useParams()
-    useEffect(() => {
+    const dispatch = useDispatch()
+    const getAllUsers = () => {
         UserService.getAllUsers().then((response) => {
             setUsers(response)
         }).catch(err => console.log(err))
+    }
+    const getMe = () => {
+        UserService.getMe().then((response) => {
+            setMe(response)
+        }).catch((error) => console.log(error))
+    }
+
+    useEffect(() => {
+        getAllUsers()
+        getMe()
     }, [])
 
     const user = users.find((user) => user.id === userId)
+
+    const handleFollowUser = (id) => {
+        dispatch(followUser(id))
+    }
+
+    const handleUnFollowUser = (id) => {
+        dispatch(unFollowUser(id))
+    }
 
     return (
         <div className="user">
@@ -32,7 +54,7 @@ const UserProfile = () => {
                         </div>
                     </div>
                     <div>
-                        <button className="btn-follow">Follow User</button>
+                        {user?.follower?.includes(me?.id) ? <button className="btn-follow" onClick={() => handleUnFollowUser(user?.id) }>Unfollow User</button> : <button className="btn-follow" onClick={() => handleFollowUser(user?.id)}>Follow User</button>}
                     </div>
                 </div>
                 <div className="post-container">
