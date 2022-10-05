@@ -33,3 +33,8 @@ export const SUCCESS_FOLLOW_USER = 'SUCCESS_FOLLOW_USER'
 export const ERROR_FOLLOW_USER = 'ERROR_FOLLOW_USER'
 export const SUCCESS_UNFOLLOW_USER = 'SUCCESS_UNFOLLOW_USER'
 export const ERROR_UNFOLLOW_USER = 'ERROR_UNFOLLOW_USER'
+
+/*----------------------------------------------- notification types---------------------------------------------------*/
+
+export const SUCCESS_NOTIFY = 'SUCCESS_NOTIFY'
+export const REMOVE_NOTIFY = 'REMOVE_NOTIFY'

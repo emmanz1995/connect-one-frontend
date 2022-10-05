@@ -6,12 +6,13 @@ import { useDispatch } from 'react-redux'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 
-
 const Layout = ({ children }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     const [ user, setUser ] = useState({})
     const [ users, setUsers ] = useState([])
+
     useEffect(() => {
         UserService.getMe().then((response) => {
             setUser(response)

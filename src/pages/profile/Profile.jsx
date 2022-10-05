@@ -21,7 +21,7 @@ const Profile = () => {
             <Navbar />
             <div className="profile__user">
                 <div className="profile__header">
-                    <div style={{ display: 'flex', gap: '20px' }}>
+                    <div className="head">
                         <div className="user-img-wrapper">
                             {user?.avatar ? <img src={user?.avatar?.url} alt="" className="profile-img"/> : <img src="/assets/undraw_male_avatar_323b.svg" alt="" className="profile-img" />}
                         </div>

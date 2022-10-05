@@ -133,3 +133,18 @@
   cursor: pointer;
   border: 1px solid #ddd;
 }
+
+@media screen and (max-width: 500px) {
+  .layout__aside {
+    display: none;
+  }
+
+  .layout__aside2 {
+    display: none;
+  }
+
+  .layout__post__container {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}

@@ -1,9 +1,9 @@
-@use '../../sass/partials/variables';
-@use '../../sass/partials/mixins';
+@use '../../sass/partials/variables' as *;
+@use '../../sass/partials/mixins' as *;
 
 .login {
   height: 100vh;
-  @include mixins.flex(flex, center, center, 0);
+  @include flex(flex, center, center, 0);
   &__background {
     width: 350px;
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
@@ -17,23 +17,33 @@
     margin-bottom: 10px;
   }
   &__title {}
+  &__error {
+    padding: 7px;
+    width: 100%;
+    margin: 10px 0;
+    border: 2px solid $dangerBorder;
+    border-radius: 5px;
+  }
+  &__errorMsg {
+    color: #842029;
+  }
   &__input {
     padding: 7px;
     width: 100%;
     margin: 10px 0;
-    border: 2px solid variables.$purple;
+    border: 2px solid $purple;
     border-radius: 5px;
   }
   &__btn {
     padding: 7px;
     width: 100%;
     margin: 10px 0;
-    border: 2px solid variables.$purple;
+    border: 2px solid $purple;
     border-radius: 5px;
     background-color: transparent;
     cursor: pointer;
     &:hover {
-      background-color: variables.$purple;
+      background-color: $purple;
       color: #FAFBFF;
       transition: all 0.2s ease-in-out;
     }
@@ -43,7 +53,7 @@
     color: #6C63FF;
   }
   &__text {
-    color: variables.$dark;
+    color: $dark;
     font-weight: normal;
   }
 }

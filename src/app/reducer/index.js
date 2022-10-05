@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 import postReducer from './postReducer'
+import notificationReducer from './notificationReducer'
 
 export default combineReducers({
-    posts: postReducer
+    posts: postReducer,
+    notification: notificationReducer
 })
