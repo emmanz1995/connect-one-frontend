@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
@@ -10,16 +10,29 @@ const validationSchema = yup.object().shape({
     dob: yup.date().required("Birthday is Required!"),
     password: yup.string().required("Password is Required!").min(6).max(20),
     confirmPassword: yup.string().required("Password is Required!").oneOf([yup.ref("password"), null], "Passwords don't match!")
-})
+});
 
 const RegisterForm = () => {
+  const [avatar, setAvatar] = useState(null)
   const { values, errors, touched, handleSubmit, handleChange } = useFormik({
     initialValues: { name: "", username: "", email: "", dob: "", password: "", confirmPassword: "" },
     validationSchema, 
     onSubmit: async(values) => {
       console.log(values);
     },
-  })
+  });
+
+  const handleChangeImage = (evt: ChangeEvent<HTMLInputElement | any>) => {
+    let File = new FileReader();
+    File.readAsDataURL(evt.target.files[0]);
+    console.log(File);
+    File.onload = () => {
+      if(File.readyState === 2) {
+        setAvatar(File.result as string | any);
+      }
+    }
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
       <div className="register-header">
@@ -55,7 +68,9 @@ const RegisterForm = () => {
 
       <div style={{ margin: "15px 0" }}>
         <label htmlFor="avatar">Avatar</label>
-        <Input type="file" accept="image/*" name="avatar" placeholder="Avatar" />
+        {/* TODO: Explore why this is complaining... */}
+        {/* @ts-ignore */}
+        <Input type="file" accept="image/*" name="avatar" placeholder="Avatar" onChange={handleChangeImage} value={avatar} />
       </div>
 
       <div style={{ margin: "15px 0" }}>

@@ -8,8 +8,7 @@ export const Card = styled.div`
   padding: 15px;
   width: 100%;
   margin: 15px auto;
-  //background-color: rgb(31 41 55 / 1);
-  background-color: #242526;
+  background-color: rgb(17 24 39 / 1);
   border-radius: 8px;
   .card-header {
     display: flex;

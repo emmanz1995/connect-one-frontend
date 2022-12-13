@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/actions/auth';
 import { useNavigate, Navigate } from 'react-router-dom';
+import Spinner from '../loading.../Spinner';
 
 const validationSchema = yup.object().shape({
   email: yup.string().required("Email is Required!").email("Has to be a valid email address!"),
@@ -14,7 +15,7 @@ const validationSchema = yup.object().shape({
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated } = useSelector((state: any) => state.auth);
+  const { isAuthenticated, loading } = useSelector((state: any) => state.auth);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -55,7 +56,7 @@ const LoginForm = () => {
         <Input type="password" placeholder="Password" name="password" value={formik.values.password} onChange={formik.handleChange} />
         <ErrorMessage>{formik.errors.password && formik.touched.password ? <p>{formik.errors.password}</p> : null}</ErrorMessage>
       </div>
-      <Button type="submit">Log In</Button>
+      <Button type="submit" disabled={loading}>{ loading ? <Spinner /> : 'Log In' }</Button>
       <p className="text-link">Don't have an Account? <a href="/register">Join Now</a></p>
     </Form>
   )

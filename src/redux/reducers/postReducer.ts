@@ -1,5 +1,5 @@
 import { postTypes } from '../types';
-import { TUser, PostT } from '../../utils/types';
+import { PostT } from '../../utils/types';
 
 interface IPost {
   id?: string;
@@ -32,7 +32,9 @@ const postReducer = (state = initialState, action: { type: string, payload: IPos
       }
     case postTypes.CREATE_POST_SUCCESS:
       return {
-        posts: [ ...state.posts, payload ]
+        posts: [ ...state.posts, payload ],
+        loading: false,
+        error: ''
       }
     case postTypes.CREATE_POST_ERROR:
       return {

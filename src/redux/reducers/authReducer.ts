@@ -8,8 +8,8 @@ type actionType = {
 }
 
 const initialState = user
-  ? { user: user, isAuthenticated: true }
-  : { user: null, isAuthenticated: false }
+  ? { user: user, isAuthenticated: true, loading: false }
+  : { user: null, isAuthenticated: false, loading: false }
 
 const authReducer = (state = initialState, action: actionType) => {
     const { payload, type } = action;
@@ -18,14 +18,16 @@ const authReducer = (state = initialState, action: actionType) => {
             return {
                 ...state,
                 user: payload,
-                isAuthenticated: true
+                isAuthenticated: true, 
+                loading: false
             }
         case authTypes.AUTHENTICATE_USER_ERROR:
             return {
                 ...state,
                 user: null,
                 isAuthenticated: false,
-                error: payload
+                error: payload,
+                loading: false
             }
         case authTypes.LOGOUT:
             return {

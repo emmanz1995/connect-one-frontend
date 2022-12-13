@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 
 export const getProfile = () => async(dispatch: Dispatch) => {
   try {
-    dispatch({ type: userType.LOADING_USER })
+    dispatch({ type: userType.LOADING_USER });
     const response = await UserService.getProfile();
     dispatch({
       type: userType.GET_PROFILE_SUCCESS,
@@ -21,6 +21,7 @@ export const getProfile = () => async(dispatch: Dispatch) => {
 }
 
 export const getUsers = () => async(dispatch: Dispatch) => {
+  dispatch({ type: userType.LOADING_USER });
   try {
     const response = await UserService.getAllUsers();
     dispatch({

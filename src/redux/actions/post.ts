@@ -5,6 +5,7 @@ import { PostT } from '../../utils/types';
 
 export const getPostFeed = () => async (dispatch: Dispatch) => {
   try {
+    dispatch({ type: postTypes.LOADING_POSTS });
     const response = await PostService.getFeedPosts();
     dispatch({
       type: postTypes.GET_FEED_POST_SUCCESS,
@@ -22,6 +23,7 @@ export const getPostFeed = () => async (dispatch: Dispatch) => {
 
 export const getMyPosts = () => async (dispatch: Dispatch) => {
   try {
+    dispatch({ type: postTypes.LOADING_POSTS });
     const response = await PostService.getMyPosts();
     dispatch({
       type: postTypes.GET_MY_POSTS_SUCCESS,
@@ -39,6 +41,7 @@ export const getMyPosts = () => async (dispatch: Dispatch) => {
 
 export const createPost = (formData: PostT) => async (dispatch: Dispatch) => {
   try {
+    // dispatch({ type: postTypes.LOADING_POSTS });
     const response = await PostService.onCreatePost(formData);
     dispatch({
       type: postTypes.CREATE_POST_SUCCESS,
@@ -56,6 +59,7 @@ export const createPost = (formData: PostT) => async (dispatch: Dispatch) => {
 
 export const likePost = (id: string) => async (dispatch: Dispatch) => {
   try {
+    dispatch({ type: postTypes.LOADING_POSTS });
     const response = await PostService.onLikePost(id);
     dispatch({
       type: postTypes.LIKE_FEED_POST_SUCCESS,
@@ -73,6 +77,7 @@ export const likePost = (id: string) => async (dispatch: Dispatch) => {
 
 export const dislikePost = (id: string) => async (dispatch: Dispatch) => {
   try {
+    dispatch({ type: postTypes.LOADING_POSTS });
     const response = await PostService.onDislikePost(id);
     dispatch({
       type: postTypes.DISLIKE_FEED_POST_SUCCESS,

@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import styled, { StyledComponent } from 'styled-components';
 import Modal from './Modal';
 import { FaWindowClose } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../redux/actions/post';
 import axios from 'axios';
+import Spinner from '../loading.../Spinner';
 
 const CreatePost: React.FC<{ hideModal: () => void }> = ({ hideModal }) => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState('');
   const [image, setImage] = useState('');
   const [content, setContent] = useState('');
@@ -26,7 +28,7 @@ const CreatePost: React.FC<{ hideModal: () => void }> = ({ hideModal }) => {
         hideModal()
       }
     }
-  }, [url, dispatch])
+  }, [url, dispatch, content, hideModal]);
 
   const postDetails = (evt: any) => {
     evt.preventDefault();
@@ -34,13 +36,16 @@ const CreatePost: React.FC<{ hideModal: () => void }> = ({ hideModal }) => {
     formData.append('file', image);
     formData.append('upload_preset', 'connect-one');
     formData.append('cloud_name', 'emmanuel-cloud-storage');
+    setLoading(true);
     axios.post('https://api.cloudinary.com/v1_1/emmanuel-cloud-storage/image/upload', formData)
       .then((response) => {
         setUrl(response?.data?.secure_url);
+        setLoading(false);
       })
       .catch((err) => {
         const errorMessage = (err.response && err.response.data && err.response.data.error && err.response.data.error.message) || err || err.error.message.toString();
         console.log(errorMessage);
+        setLoading(false);
       })
   }
 
@@ -62,7 +67,7 @@ const CreatePost: React.FC<{ hideModal: () => void }> = ({ hideModal }) => {
         <div style={{ margin: "15px 0" }}>
           <Image type="file" placeholder="Image" name="image" onChange={handleChangeImage} required />
         </div>
-        <Button type='submit'>Create Post</Button>
+        <Button type='submit' disabled={loading}>{loading ? <Spinner /> : 'Create Post'}</Button>
       </CreatePostWrapper>
     </Modal>
   );

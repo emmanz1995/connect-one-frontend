@@ -5,6 +5,7 @@ import { Dispatch } from 'redux';
 
 export const login = (formData: ILogin, navigate: any) => async (dispatch: Dispatch<any>) => {
   try {
+    dispatch({ type: authTypes.LOADING_AUTH });
     const response = await AuthService.onLogin(formData);
     navigate('/feed');
     dispatch({
