@@ -41,7 +41,7 @@ const Post = () => {
           </div>
           <div className="card-body">
             <div style={{ width: '100%', height: 365 }}>
-              <img src={post?.image} alt="" width="600" height="400" style={{ width: '100%', height: '100%' }} />
+              <img src={post?.image?.url} alt="" width="600" height="400" style={{ width: '100%', height: '100%' }} />
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
               <p className="p-name">{post?.postedBy?.name}</p>

@@ -12,24 +12,25 @@ const validationSchema = yup.object().shape({
     confirmPassword: yup.string().required("Password is Required!").oneOf([yup.ref("password"), null], "Passwords don't match!")
 });
 
+const handleRegister = async(values: object) => {
+  console.log(values)
+}
+
 const RegisterForm = () => {
   const [avatar, setAvatar] = useState(null)
   const { values, errors, touched, handleSubmit, handleChange } = useFormik({
     initialValues: { name: "", username: "", email: "", dob: "", password: "", confirmPassword: "" },
     validationSchema, 
-    onSubmit: async(values) => {
-      console.log(values);
-    },
+    onSubmit: handleRegister,
   });
 
-  const handleChangeImage = (evt: ChangeEvent<HTMLInputElement | any>) => {
-    let File = new FileReader();
+  const handleChangeImage = (evt: any) => {
+    let File: any = new FileReader();
     File.readAsDataURL(evt.target.files[0]);
     console.log(File);
     File.onload = () => {
-      if(File.readyState === 2) {
+      if(File.readyState === 2)
         setAvatar(File.result as string | any);
-      }
     }
   }
 
@@ -70,7 +71,7 @@ const RegisterForm = () => {
         <label htmlFor="avatar">Avatar</label>
         {/* TODO: Explore why this is complaining... */}
         {/* @ts-ignore */}
-        <Input type="file" accept="image/*" name="avatar" placeholder="Avatar" onChange={handleChangeImage} value={avatar} />
+        <Input type="file" accept="image/*" name="avatar" placeholder="Avatar" onChange={handleChangeImage} />
       </div>
 
       <div style={{ margin: "15px 0" }}>

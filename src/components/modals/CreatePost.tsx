@@ -1,57 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled, { StyledComponent } from 'styled-components';
 import Modal from './Modal';
 import { FaWindowClose } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { createPost } from '../../redux/actions/post';
-import axios from 'axios';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { createPost } from '../../redux/actions/post';
+// import axios from 'axios';
 import Spinner from '../loading.../Spinner';
 
 const CreatePost: React.FC<{ hideModal: () => void }> = ({ hideModal }) => {
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const [url, setUrl] = useState('');
-  const [image, setImage] = useState('');
-  const [content, setContent] = useState('');
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    if(url) {
-      const formData = {
-        image: url,
-        content: content
-      }
-      if(content === '') {
-        setMessage('Caption is required!');
-      } else {
-        dispatch<any>(createPost(formData));
-        hideModal()
-      }
-    }
-  }, [url, dispatch, content, hideModal]);
 
   const postDetails = (evt: any) => {
-    evt.preventDefault();
-    const formData = new FormData();
-    formData.append('file', image);
-    formData.append('upload_preset', 'connect-one');
-    formData.append('cloud_name', 'emmanuel-cloud-storage');
-    setLoading(true);
-    axios.post('https://api.cloudinary.com/v1_1/emmanuel-cloud-storage/image/upload', formData)
-      .then((response) => {
-        setUrl(response?.data?.secure_url);
-        setLoading(false);
-      })
-      .catch((err) => {
-        const errorMessage = (err.response && err.response.data && err.response.data.error && err.response.data.error.message) || err || err.error.message.toString();
-        console.log(errorMessage);
-        setLoading(false);
-      })
+    evt.preventDefault()
   }
 
-  const handleChangeImage = (evt: any) => {
-    setImage(evt.target.files[0]);
-  }
+  const handleChangeImage = (evt: any) => {}
 
   return (
     <Modal onClick={(evt: any) => evt.stopPropagation()}>
@@ -60,14 +22,14 @@ const CreatePost: React.FC<{ hideModal: () => void }> = ({ hideModal }) => {
           <h3>Create a new Post</h3>
           <FaWindowClose onClick={hideModal} />
         </CreatePostHeader>
-        {message && <div>{message}</div>}
+        {/*{message && <div>{message}</div>}*/}
         <div style={{ margin: "15px 0" }}>
-          <Input rows={5} cols={10} placeholder="Whats on your mind?" name="content" value={content} onChange={(evt) => setContent(evt.target.value)} />
+          <Input rows={5} cols={10} placeholder="Whats on your mind?" name="content" value={'content'} />
         </div>
         <div style={{ margin: "15px 0" }}>
           <Image type="file" placeholder="Image" name="image" onChange={handleChangeImage} required />
         </div>
-        <Button type='submit' disabled={loading}>{loading ? <Spinner /> : 'Create Post'}</Button>
+        {/*<Button type='submit' disabled={loading}>{loading ? <Spinner /> : 'Create Post'}</Button>*/}
       </CreatePostWrapper>
     </Modal>
   );

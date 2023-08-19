@@ -19,7 +19,7 @@ interface IState {
 }
 
 interface ICurrentUser {
-  avatar: {publicId: string, url: string};
+  avatar: { publicId: string, url: string };
   id: string;
   token: string;
   username: string;
@@ -68,7 +68,7 @@ const ProfilePost = () => {
           </header>
           <div className="card-body">
             <div className="img">
-              <img src={post?.image} alt="" width="600" height="400" className="img-post" />
+              <img src={post?.image?.url} alt="" width="600" height="400" className="img-post" />
             </div>
             <h3>{post?.content}</h3>
           </div>
